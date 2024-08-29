@@ -1,4 +1,4 @@
-SELECT * FROM (
+SELECT * FROM ( -- SITS/Uniface refuses to run statements that begin with a WITH
     WITH ranked_men_prb AS (
         SELECT
             men_prb.prb_prjc,
@@ -38,7 +38,7 @@ SELECT * FROM (
         -- The output of this SELECT is interpolated into a JavaScript string literal via the
         -- calling SRL. JSON_OBJECT correctly escapes double-quotes, but the backslash needs to be
         -- escaped again so it doesn't get eaten before being send to JSON.parse. Single quotes also
-        -- need to be escaped so they don't interfere with the literal declaration. [headache emoji]
+        -- need to be escaped so they don't interfere with the literal declaration. 🤕
         REPLACE(
             REPLACE(
                 JSON_OBJECT(
@@ -48,6 +48,7 @@ SELECT * FROM (
                     'Build item created': TO_CHAR(men_pbi_for_latest_build_of_active_prjs.pbi_cred, 'YYYY-MM-DD') || 'T' || TO_CHAR(men_pbi_for_latest_build_of_active_prjs.pbi_cret, 'HH24:MI'),
                     'Dictonary': men_pbi_for_latest_build_of_active_prjs.pbi_dctc,
                     'Entity': men_pbi_for_latest_build_of_active_prjs.pbi_entc,
+                    -- pbi_pkvs is a Uniface list so replace the delimiters to prevent chaos
                     'Primary key': REPLACE(men_pbi_for_latest_build_of_active_prjs.pbi_pkvs, UNISTR('\001b'), ', ')
                 ),
                 '\"',
