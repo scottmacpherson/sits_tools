@@ -1,0 +1,40 @@
+<div class="sv-page-header">
+    <h1>Duplicate project build items</h1>
+</div>
+
+<p>PBI records with the same dictionary + entity + primary key, which appear more than once across the most recent builds of active projects.</p>
+
+<p>Excludes a few entities we don't care about like <code>men_prt</code> and <code>men_slv</code>.</p>
+
+<div class="sv-table-container sv-table-responsive">
+    <table id="mst_syduppbi01_table" class="sv-table">
+        <!-- Table contents are populated by DataTables -->
+    </table>
+</div>
+
+<script>
+    sits_attach_event(window, "load", function() {
+        function mst_syduppbi01_data() {
+            // RQH SYDUPPBI01 returns a gold-semi-colon-delimited string of JSON objects
+            // Split that and parse each entry as JSON
+            return '<<"P01=SYDUPPBI01·;P02="&PSRS_YRQH.RUN·;P02>>'.split("\u001B").map(e => JSON.parse(e));
+        }
+        
+        let mst_syduppbi01_datatables_options = {
+            searching: true,
+            pageLength: 100,
+            data: mst_syduppbi01_data(),
+            // Pluck out the first object in our dataset and use the keys from that to build the table's columns
+            columns: Object.keys(mst_syduppbi01_data()[0]).map(function(e) {
+                return {
+                    title: e,
+                    data: function(row, type, set, meta) {
+                        return row[e]
+                    },
+                    defaultContent: ""
+                }
+            })
+        };
+        sits_datatables_widget("table#mst_syduppbi01_table", mst_syduppbi01_datatables_options);
+    });
+</script>
