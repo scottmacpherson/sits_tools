@@ -4,10 +4,6 @@ A few little bits-and-bobs that might come in handy to other [SITS:Vision](https
 
 A little SQL script to quickly determine the build order (and therefor almost certainly the intended release order) for a list of projects.
 
-### TODO
-
-- [ ] Provide sample SRL syntax for rendering the output using DataTables.
-
 ## [duplicate_pri_records.sql](duplicate_pri_records.sql)
 
 SQL script to find duplicate PBI records across all active and in-use projects. Menu options XPRJ2 and friends help find duplicate PRI records, but fails to account for what is actually built when project templates are used.
