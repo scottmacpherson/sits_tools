@@ -21,3 +21,7 @@ Content of SRL which renders the output of `duplicate_pri_records.sql`.
 2. Set RQI "Output Mode" (`RQI_MODE`) to "List" (`MODE1`)
 3. Create an SRL with the content of `duplicate_pri_records.html` and tweak as required, especially the call to `PSRS_YRQH.RUN` on line 19.
 4. The usual POD/POP and COP stuff from there
+
+### [xpc_convert.py](xpc_convert.py)
+
+Python script which attempts to turn an XPC file into a list of record objects. Each XpcRecord's `body_as_dict` property returns a dictionary of that record's fields and values.
