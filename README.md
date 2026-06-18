@@ -32,4 +32,4 @@ Python script for building SSO links externally. Only works for AES-CBC.
 
 ### [fix_uniface_list_of_json_objects.py](fix_uniface_list_of_json_objects.py)
 
-Python script to turn a Uniface List of JSON objects into a valid JSON file.
+Python script to turn a Uniface List of JSON objects into a valid JSON list.
